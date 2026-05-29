@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* ============================================================================
+ *  BRANDING — change your colors here (and nowhere else)
+ * ============================================================================
+ *  These CSS variables drive the whole site. Edit a value and every page,
+ *  card, and button updates. Fonts are set in src/app/layout.tsx.
+ * ========================================================================== */
+:root {
+  --brand-paper: #f4f6fb; /* page background */
+  --brand-surface: #ffffff; /* cards & panels */
+  --brand-ink: #142a63; /* primary text (navy) */
+  --brand-muted: #5b6478; /* secondary text */
+  --brand-line: #d7deec; /* borders & dividers */
+  --brand-accent: #ce2029; /* buttons, tags, highlights (red) */
+  --brand-accent-ink: #ffffff; /* text on accent */
+  --brand-radius: 0.5rem; /* corner roundness */
+}
+
+/* Expose the brand tokens to Tailwind utilities (bg-paper, text-ink, etc.). */
+@theme inline {
+  --color-paper: var(--brand-paper);
+  --color-surface: var(--brand-surface);
+  --color-ink: var(--brand-ink);
+  --color-muted: var(--brand-muted);
+  --color-line: var(--brand-line);
+  --color-accent: var(--brand-accent);
+  --color-accent-ink: var(--brand-accent-ink);
+
+  --radius-brand: var(--brand-radius);
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+}
+
+* {
+  border-color: var(--brand-line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-paper);
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  /* Subtle layered warmth so the page is never a flat slab of color. */
+  background-image:
+    radial-gradient(
+      60rem 60rem at 85% -10%,
+      color-mix(in srgb, var(--brand-accent) 7%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      50rem 50rem at -10% 0%,
+      color-mix(in srgb, var(--brand-ink) 4%, transparent),
+      transparent 55%
+    );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* One-shot entrance used for staggered reveals on the gallery grid. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Accessible focus ring that matches the brand accent. */
+:focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}

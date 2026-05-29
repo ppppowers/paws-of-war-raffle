@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="Sunday Pour-Over Set placeholder photo 1">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6f2ea"/><stop offset="1" stop-color="#ece4d6"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <circle cx="380" cy="250" r="180" fill="#8a6d3b" opacity="0.12"/>
+  <circle cx="860" cy="640" r="120" fill="#8a6d3b" opacity="0.10"/>
+  <rect x="40" y="40" width="1120" height="820" fill="none" stroke="#8a6d3b" stroke-opacity="0.25" stroke-width="2" rx="16"/>
+  <path d="M560 280h80l-12 80h-56z" fill="none" stroke="#8a6d3b" stroke-width="4" opacity="0.55"/>
+  <text x="600" y="470" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#1d1b16">Sunday Pour-Over Set</text>
+  <text x="600" y="535" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#716b5e" letter-spacing="3">PHOTO 1 OF 3</text>
+  <text x="600" y="585" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#a59c8b">Replace with your photo</text>
+</svg>
