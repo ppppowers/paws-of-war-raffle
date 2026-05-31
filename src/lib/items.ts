@@ -15,6 +15,7 @@ export type Item = {
   images: string[];
   includedItems: string[];
   available: boolean;
+  displayOrder: number;
 };
 
 /** Raw row shape returned by Supabase (snake_case). */
@@ -29,6 +30,7 @@ type ItemRow = {
   images: string[] | null;
   included_items: string[] | null;
   available: boolean;
+  display_order: number;
 };
 
 function mapRow(row: ItemRow): Item {
@@ -43,6 +45,7 @@ function mapRow(row: ItemRow): Item {
     images: row.images ?? [],
     includedItems: row.included_items ?? [],
     available: row.available,
+    displayOrder: row.display_order,
   };
 }
 
@@ -56,6 +59,7 @@ export async function getVisibleItems(): Promise<Item[]> {
     .from("items")
     .select("*")
     .eq("available", true)
+    .order("display_order", { ascending: true })
     .order("created_at", { ascending: true });
 
   if (error) {
@@ -94,6 +98,7 @@ export async function getAllItemsAdmin(): Promise<Item[]> {
   const { data, error } = await supabase
     .from("items")
     .select("*")
+    .order("display_order", { ascending: true })
     .order("created_at", { ascending: true });
 
   if (error) {

@@ -32,6 +32,7 @@ export default function ItemForm({
   const [description, setDescription] = useState(item?.description ?? "");
   const [notes, setNotes] = useState(item?.notes ?? "");
   const [available, setAvailable] = useState(item?.available ?? true);
+  const [displayOrder, setDisplayOrder] = useState(String(item?.displayOrder ?? 0));
   const [includedItems, setIncludedItems] = useState<string[]>(
     item?.includedItems.length ? item.includedItems : [""],
   );
@@ -128,6 +129,7 @@ export default function ItemForm({
       images,
       includedItems: includedItems.filter((v) => v.trim() !== ""),
       available,
+      displayOrder: parseInt(displayOrder, 10) || 0,
     };
 
     startTransition(async () => {
@@ -296,6 +298,22 @@ export default function ItemForm({
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />
+      </label>
+
+      {/* Display order */}
+      <label className="flex flex-col gap-1.5 text-sm font-medium">
+        Display order
+        <input
+          type="number"
+          inputMode="numeric"
+          step={1}
+          className={`${fieldClass} w-32 font-normal`}
+          value={displayOrder}
+          onChange={(e) => setDisplayOrder(e.target.value)}
+        />
+        <span className="text-xs font-normal text-muted">
+          Lower numbers show first on the gallery. Ties fall back to creation order.
+        </span>
       </label>
 
       {/* Available toggle */}

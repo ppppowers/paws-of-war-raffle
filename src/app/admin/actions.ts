@@ -15,6 +15,7 @@ export type ItemInput = {
   images: string[];
   includedItems: string[];
   available: boolean;
+  displayOrder: number;
 };
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
@@ -61,6 +62,9 @@ function toRow(input: ItemInput) {
     images,
     included_items: input.includedItems.map((s) => s.trim()).filter(Boolean),
     available: input.available,
+    display_order: Number.isFinite(input.displayOrder)
+      ? Math.trunc(input.displayOrder)
+      : 0,
   };
 }
 
