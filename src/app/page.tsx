@@ -50,8 +50,9 @@ export default async function HomePage() {
         <h2 className="font-display text-2xl tracking-tight">How to enter</h2>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
           Raffle tickets are available at the event. The drawing will be held{" "}
-          5/21/26 at Paws of War. Tickets are [PRICE] each, you need not be
-          present to win. For questions, a Paws of War Volunteer or Staff.{" "}
+          5/21/26 at Paws of War. Tickets are $20 for 20 tickets or 3 tickets
+          for $5, you need not be present to win. For questions, ask a Paws of
+          War Volunteer or Staff.{" "}
           <a
             href="https://pawsofwar.org"
             className="font-medium text-accent hover:opacity-80"
