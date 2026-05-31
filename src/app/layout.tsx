@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   },
   description:
     "Browse the raffle baskets supporting Paws of War — Help A Vet, Save A Pet. Open any basket to see photos and everything inside.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "Paws of War Raffle",
     description:
