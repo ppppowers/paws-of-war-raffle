@@ -55,11 +55,38 @@ export default function ItemForm({
     const uploaded: string[] = [];
 
     for (const file of Array.from(fileList)) {
-      const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+      // Browsers can't display HEIC/HEIF (common on iPhones) and neither can
+      // next/image, so convert those to JPEG before upload.
+      let blob: Blob = file;
+      let ext = file.name.includes(".") ? file.name.split(".").pop()! : "jpg";
+      const name = file.name.toLowerCase();
+      const isHeic =
+        file.type === "image/heic" ||
+        file.type === "image/heif" ||
+        name.endsWith(".heic") ||
+        name.endsWith(".heif");
+      if (isHeic) {
+        try {
+          const heic2any = (await import("heic2any")).default;
+          const out = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
+          blob = Array.isArray(out) ? out[0] : out;
+          ext = "jpg";
+        } catch {
+          setUploadError(
+            `Couldn't convert ${file.name}. Try saving it as a JPG and uploading again.`,
+          );
+          continue;
+        }
+      }
+
       const path = `${crypto.randomUUID()}.${ext}`;
       const { error } = await supabase.storage
         .from("item-images")
-        .upload(path, file, { cacheControl: "3600", upsert: false });
+        .upload(path, blob, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: blob.type || `image/${ext}`,
+        });
       if (error) {
         setUploadError(error.message);
         continue;
@@ -214,7 +241,7 @@ export default function ItemForm({
           {uploading ? "Uploading…" : "+ Upload photos"}
           <input
             type="file"
-            accept="image/*"
+            accept="image/*,.heic,.heif"
             multiple
             className="hidden"
             disabled={uploading}
